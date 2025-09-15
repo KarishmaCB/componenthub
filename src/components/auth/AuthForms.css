@@ -1,0 +1,253 @@
+.auth-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 30px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+}
+
+.auth-form h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.demo-credentials {
+  margin-bottom: 25px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.demo-credentials p {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+.demo-btn {
+  padding: 8px 12px;
+  margin: 5px 5px 0 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.demo-btn.admin {
+  background: #dc3545;
+  color: white;
+}
+
+.demo-btn.admin:hover {
+  background: #c82333;
+}
+
+.demo-btn.user {
+  background: #28a745;
+  color: white;
+}
+
+.demo-btn.user:hover {
+  background: #218838;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.error-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 12px 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  border: 1px solid #f5c6cb;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: none;
+}
+
+.auth-button.primary {
+  background: #007bff;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.auth-button.primary:hover {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.auth-button.primary:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.auth-button.secondary {
+  background: transparent;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+
+.auth-button.secondary:hover {
+  background: #007bff;
+  color: white;
+}
+
+.auth-switch {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.auth-switch p {
+  margin: 0 0 15px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.oauth-section {
+  margin: 25px 0;
+  padding: 20px 0;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.oauth-section h3 {
+  text-align: center;
+  margin: 0 0 20px 0;
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.oauth-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.oauth-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background: white;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.oauth-button:hover {
+  border-color: #007bff;
+  background: #f8f9fa;
+}
+
+.oauth-button.google {
+  border-color: #db4437;
+  color: #db4437;
+}
+
+.oauth-button.google:hover {
+  background: #db4437;
+  color: white;
+}
+
+.oauth-button.linkedin {
+  border-color: #0077b5;
+  color: #0077b5;
+}
+
+.oauth-button.linkedin:hover {
+  background: #0077b5;
+  color: white;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .auth-form {
+    margin: 20px;
+    padding: 25px 20px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  .demo-btn {
+    width: 100%;
+    margin: 5px 0;
+  }
+  
+  .oauth-buttons {
+    gap: 12px;
+  }
+}
