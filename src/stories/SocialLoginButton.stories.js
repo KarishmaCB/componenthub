@@ -1,4 +1,4 @@
-import SocialLoginButton from './SocialLoginButton';
+import SocialLoginButton from '../components/SocialLoginButton';
 
 export default {
   title: 'ComponentHub/Authentication/SocialLoginButton',
@@ -14,19 +14,28 @@ export default {
   tags: ['autodocs'],
   argTypes: {
     provider: {
-      control: 'select',
+      control: { type: 'select' },
       options: ['google', 'facebook', 'linkedin'],
       description: 'OAuth provider platform',
     },
     loading: {
-      control: 'boolean',
+      control: { type: 'boolean' },
       description: 'Shows loading state with spinner animation',
     },
     disabled: {
-      control: 'boolean',
+      control: { type: 'boolean' },
       description: 'Disables button interaction',
     },
     onClick: { action: 'clicked' },
+  },
+};
+
+// Default story
+export const Default = {
+  args: {
+    provider: 'google',
+    loading: false,
+    disabled: false,
   },
 };
 

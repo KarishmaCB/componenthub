@@ -1,10 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import AuthPage from './components/auth/AuthPage';
-import Dashboard from './pages/Dashboard';
+import AuthPageNew from './components/auth/AuthPageNew';
+import Dashboard from './components/Dashboard';
+import ComponentShowcase from './components/ComponentShowcase';
 import AdminPanel from './pages/AdminPanel';
 import DataDeletion from './components/DataDeletion';
+import StorybookWrapper from './components/StorybookWrapper';
 import ProtectedRoute from './utils/ProtectedRoute';
 import './App.css';
 
@@ -19,19 +21,39 @@ function AppContent() {
           path="/login" 
           element={
             !isAuthenticated() ? (
-              <AuthPage />
+              <AuthPageNew />
             ) : (
-              <Navigate to="/dashboard" replace />
+              <Navigate to="/" replace />
             )
           } 
         />
         
-        {/* Protected Route - Dashboard (Any authenticated user) */}
+        {/* Protected Route - Main Dashboard */}
         <Route 
           path="/dashboard" 
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          } 
+        />
+        
+        {/* Protected Route - Component Showcase */}
+        <Route 
+          path="/components" 
+          element={
+            <ProtectedRoute>
+              <ComponentShowcase />
+            </ProtectedRoute>
+          } 
+        />
+        
+        {/* Protected Route - Storybook (Admin only) */}
+        <Route 
+          path="/storybook" 
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <StorybookWrapper />
             </ProtectedRoute>
           } 
         />
@@ -52,14 +74,13 @@ function AppContent() {
           element={<DataDeletion />} 
         />
         
-        {/* Default Route - Redirect based on auth status */}
+        {/* Default Route - Dashboard */}
         <Route 
           path="/" 
           element={
-            <Navigate 
-              to={isAuthenticated() ? "/dashboard" : "/login"} 
-              replace 
-            />
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
           } 
         />
         
@@ -68,7 +89,7 @@ function AppContent() {
           path="*" 
           element={
             <Navigate 
-              to={isAuthenticated() ? "/dashboard" : "/login"} 
+              to={isAuthenticated() ? "/" : "/login"} 
               replace 
             />
           } 

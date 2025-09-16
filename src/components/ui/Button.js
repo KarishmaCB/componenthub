@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Button component with multiple variants and sizes
 const Button = ({ 
   variant = 'primary', 
   size = 'medium', 
@@ -84,6 +83,14 @@ const Button = ({
         '&:hover': {
           color: '#0056b3',
         }
+      },
+      social: {
+        backgroundColor: '#ffffff',
+        color: '#374151',
+        border: '1px solid #d1d5db',
+        '&:hover': {
+          backgroundColor: '#f9fafb',
+        }
       }
     };
     return variants[variant] || variants.primary;
@@ -141,6 +148,30 @@ const Button = ({
       style={buttonStyle}
       disabled={disabled || loading}
       onClick={onClick}
+      onMouseEnter={(e) => {
+        if (!disabled && !loading) {
+          if (variant === 'primary') {
+            e.target.style.backgroundColor = '#0056b3';
+          } else if (variant === 'social') {
+            e.target.style.backgroundColor = '#f9fafb';
+          } else if (variant === 'outline') {
+            e.target.style.backgroundColor = '#007bff';
+            e.target.style.color = '#ffffff';
+          }
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!disabled && !loading) {
+          if (variant === 'primary') {
+            e.target.style.backgroundColor = '#007bff';
+          } else if (variant === 'social') {
+            e.target.style.backgroundColor = '#ffffff';
+          } else if (variant === 'outline') {
+            e.target.style.backgroundColor = 'transparent';
+            e.target.style.color = '#007bff';
+          }
+        }
+      }}
       {...props}
     >
       {loading && (
@@ -159,148 +190,4 @@ const Button = ({
   );
 };
 
-export default {
-  title: 'Core UI Components/Button',
-  component: Button,
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
-        component: 'Versatile button component with multiple variants, sizes, and states. Supports icons, loading states, and full-width layouts.',
-      },
-    },
-  },
-  argTypes: {
-    variant: {
-      control: { type: 'select' },
-      options: ['primary', 'secondary', 'success', 'danger', 'warning', 'outline', 'ghost', 'link'],
-    },
-    size: {
-      control: { type: 'select' },
-      options: ['small', 'medium', 'large'],
-    },
-    disabled: {
-      control: 'boolean',
-    },
-    loading: {
-      control: 'boolean',
-    },
-    fullWidth: {
-      control: 'boolean',
-    },
-  },
-};
-
-// Add CSS animation for loading spinner
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-`;
-document.head.appendChild(style);
-
-export const Primary = {
-  args: {
-    variant: 'primary',
-    children: 'Primary Button',
-  },
-};
-
-export const Secondary = {
-  args: {
-    variant: 'secondary',
-    children: 'Secondary Button',
-  },
-};
-
-export const Success = {
-  args: {
-    variant: 'success',
-    children: 'Success Button',
-  },
-};
-
-export const Danger = {
-  args: {
-    variant: 'danger',
-    children: 'Danger Button',
-  },
-};
-
-export const Warning = {
-  args: {
-    variant: 'warning',
-    children: 'Warning Button',
-  },
-};
-
-export const Outline = {
-  args: {
-    variant: 'outline',
-    children: 'Outline Button',
-  },
-};
-
-export const Ghost = {
-  args: {
-    variant: 'ghost',
-    children: 'Ghost Button',
-  },
-};
-
-export const Link = {
-  args: {
-    variant: 'link',
-    children: 'Link Button',
-  },
-};
-
-export const Sizes = () => (
-  <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-    <Button size="small">Small</Button>
-    <Button size="medium">Medium</Button>
-    <Button size="large">Large</Button>
-  </div>
-);
-
-export const States = () => (
-  <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-    <Button>Default</Button>
-    <Button loading>Loading</Button>
-    <Button disabled>Disabled</Button>
-  </div>
-);
-
-export const WithIcons = () => (
-  <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
-    <Button icon={<span>📁</span>}>Save</Button>
-    <Button variant="danger" icon={<span>🗑️</span>}>Delete</Button>
-    <Button variant="success" icon={<span>✓</span>}>Confirm</Button>
-    <Button variant="outline" icon={<span>↻</span>}>Refresh</Button>
-  </div>
-);
-
-export const FullWidth = {
-  args: {
-    fullWidth: true,
-    children: 'Full Width Button',
-  },
-  parameters: {
-    layout: 'padded',
-  },
-};
-
-export const AllVariants = () => (
-  <div style={{ display: 'grid', gap: '8px', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))' }}>
-    <Button variant="primary">Primary</Button>
-    <Button variant="secondary">Secondary</Button>
-    <Button variant="success">Success</Button>
-    <Button variant="danger">Danger</Button>
-    <Button variant="warning">Warning</Button>
-    <Button variant="outline">Outline</Button>
-    <Button variant="ghost">Ghost</Button>
-    <Button variant="link">Link</Button>
-  </div>
-);
+export default Button;

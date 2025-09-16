@@ -11,6 +11,8 @@ import {
   doc, 
   setDoc, 
   getDoc, 
+  getDocs,
+  collection,
   serverTimestamp 
 } from 'firebase/firestore';
 import { auth, db, googleProvider, facebookProvider } from '../config/firebase';
@@ -167,8 +169,22 @@ export const AuthProvider = ({ children }) => {
       const result = await signInWithPopup(auth, googleProvider);
       const firebaseUser = result.user;
       
-      // Determine role based on email or set default
-      const role = firebaseUser.email?.includes('admin') ? 'admin' : 'user';
+      // Determine role based on email or make first user admin
+      let role = 'user';
+      
+      // Check if this is the first user (admin)
+      try {
+        const usersQuery = await getDocs(collection(db, 'users'));
+        if (usersQuery.empty) {
+          role = 'admin'; // First user becomes admin
+        } else if (firebaseUser.email?.includes('admin')) {
+          role = 'admin'; // Email-based admin assignment
+        }
+      } catch (error) {
+        console.error('Error checking user count:', error);
+        // Fallback to email-based role assignment
+        role = firebaseUser.email?.includes('admin') ? 'admin' : 'user';
+      }
       
       // Create or update user document
       await createUserDocument(firebaseUser, { role });
